@@ -1,6 +1,7 @@
 module sui_place::canvas;
 
 use sui::table_vec::{Self, TableVec};
+use sui_place::errors::{invalid_x_coordinate, invalid_y_coordinate};
 
 // === Structs ===
 
@@ -21,8 +22,8 @@ public fun new(width: u64, height: u64, ctx: &mut TxContext): Canvas {
 }
 
 public fun set_pixel(canvas: &mut Canvas, x: u64, y: u64, rgb: u32) {
-    assert!(x < canvas.width);
-    assert!(y < canvas.height);
+    assert!(x < canvas.width, invalid_x_coordinate!());
+    assert!(y < canvas.height, invalid_y_coordinate!());
 
     let row = canvas.rows.borrow_mut(y);
     let pixel = row.borrow_mut(x);

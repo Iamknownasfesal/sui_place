@@ -1,6 +1,7 @@
 module sui_place::waitlist;
 
 use sui::{clock::Clock, table::{Self, Table}};
+use sui_place::errors::wait_time_exceeded;
 
 // === Structs ===
 
@@ -29,6 +30,9 @@ public fun add_to_waitlist(
     };
 
     let value = waitlist.list.borrow_mut(ctx.sender());
-    assert!(clock.timestamp_ms() - *value > waitlist.wait_time);
+    assert!(
+        clock.timestamp_ms() - *value > waitlist.wait_time,
+        wait_time_exceeded!(),
+    );
     *value = clock.timestamp_ms();
 }
