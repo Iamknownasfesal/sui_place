@@ -40,6 +40,7 @@ public fun get_pixel(canvas: &Canvas, x: u64, y: u64): u32 {
 }
 
 // === Private Functions ===
+
 fun initialize_canvas(
     width: u64,
     height: u64,

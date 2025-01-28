@@ -9,6 +9,7 @@ use sui_place::{
 };
 
 // === Structs ===
+
 public struct Place has key, store {
     id: UID,
     canvas: Canvas,
