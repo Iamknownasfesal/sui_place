@@ -40,7 +40,7 @@ public fun set_pixel(
     clock: &Clock,
     ctx: &mut TxContext,
 ) {
-    waitlist::add_to_waitlist(&mut place.waitlist, clock, ctx);
+    place.waitlist.add_to_waitlist(clock, ctx);
     place.treasury.join(payment.split(place.spam_price, ctx).into_balance());
     canvas::set_pixel(&mut place.canvas, x, y, rgb);
 }
